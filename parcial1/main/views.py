@@ -3,22 +3,22 @@ from django.contrib import messages #aca va a mostrar los datos solicitados que 
 from django.views import generic #importa el generico = forma en que se muestra lo importado
 from .forms import BlogForm, ReviewForm,ContactForm,CreateUserForm #, ReviewForm, BlogForm #el conector de backend y frontend (forms)
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
-from django.shortcuts import redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import authenticate, login, logout #se importa la autenticacion, login y logout de django
+from django.contrib.auth.decorators import login_required	#imporamos el requerimiento de login de django
+from django.contrib.auth.forms import UserCreationForm		#importamos el formulario para los usuarios de django
+from django.http import HttpResponse						
+from django.shortcuts import redirect						#importamos la redireccion para diferentes casos
+from django.contrib.auth.mixins import LoginRequiredMixin	#importamos el limitador de acciones para los usuarios no logeados
 from .models import ( #importamos todos los datos desde las tablas
 	Blogs,
 	Reviews,
 	)
 
-def registerPage(request):
-	if request.user.is_authenticated:
-		return redirect("main:home")
+def registerPage(request): #Funcion registradora de usuario
+	if request.user.is_authenticated: 	#decision que verifica si el usuario existe
+		return redirect("main:home")	#si existe regresa al home
 	else:
-		form = CreateUserForm()
+		form = CreateUserForm()			#si no existe, empieza el proceso para crear un usuario
 		if request.method == 'POST':
 			form = CreateUserForm(request.POST)
 			if form.is_valid():
