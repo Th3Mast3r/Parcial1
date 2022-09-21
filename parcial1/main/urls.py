@@ -16,3 +16,6 @@ urlpatterns = [ #aqui se ven todas las secciones de la pagina web
 	path('login/', views.loginPage, name="login"),
 	path('logout/', views.logoutUser, name="logout"),
 ]
+
+#slug=(importante)es para no repetir a si mismo(automatiza el url poniendo numero a los proyecto que vayan en portafolio (vainancq.com/portfolio/1 o 2 o 3 etc...))
+#cuando hay varios proyectos, y queremos que se desplieguen, lo hara de forma automatica (slug)

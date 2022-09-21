@@ -9,6 +9,7 @@ class Blogs(models.Model): #modelo del blog
         verbose_name = 'Blog'
         ordering = ["name"]
 
+    #lo que va dentro de los modelos, declaracion de campos de la BD
     date = models.DateTimeField(blank=True, null=True)
     author = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -56,7 +57,7 @@ class Reviews(models.Model): #modelo del review
     def get_absolute_url(self):
         return f"/review/{self.slug}"
 
-class Contact(models.Model):
+class Contact(models.Model): #modelo de contact
     
     class Meta:
         verbose_name_plural = 'Contacts'

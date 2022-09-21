@@ -19,3 +19,5 @@ class reviewAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'timestamp', 'name')
     
+#aqui se maneja la parte administrativa y se puede visualizar la base de datos por medio del localhost
+#y para ver todas las tablas

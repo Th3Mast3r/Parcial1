@@ -20,40 +20,40 @@ def registerPage(request): #Funcion registradora de usuario
 	else:
 		form = CreateUserForm()			#si no existe, empieza el proceso para crear un usuario
 		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
+			form = CreateUserForm(request.POST) #ingresa los datos del usuario al forms a travez de POST
 			if form.is_valid():
 				form.save()
 				user = form.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
 
-				return redirect('main:login')
+				return redirect('main:login') #regresa (o redirecta) al home
 			
 
 		context = {'form':form}
 		return render(request, 'main/register.html', context)
 
-def loginPage(request):
-	if request.user.is_authenticated:
+def loginPage(request): #parte de para ingresar los datos del ususario ya existente
+	if request.user.is_authenticated: #decision que dice si existe lo mande al home
 		return redirect("main:home")
 	else:
-		if request.method == 'POST':
+		if request.method == 'POST': #si no existe, recibimos por POST los datos de usarname y password
 			username = request.POST.get('username')
 			password =request.POST.get('password')
 
-			user = authenticate(request, username=username, password=password)
+			user = authenticate(request, username=username, password=password) #autenticación del ususario
 
-			if user is not None:
-				login(request, user)
+			if user is not None:	
+				login(request, user)	#si es aceptado, lo  redirecciona al home
 				return redirect("main:home")
 			else:
-				messages.info(request, 'Username OR password is incorrect')
+				messages.info(request, 'Username OR password is incorrect') #de no ser correcto le da la advertencia
 
 		context = {}
-		return render(request, 'main/login.html', context)
+		return render(request, 'main/login.html', context) #finaliza mandando al login para ingresar valores nuevamente
 
-def logoutUser(request):
+def logoutUser(request): #funciona para hacer logout
 	logout(request)
-	return redirect('main:login')
+	return redirect('main:login') #cuando se realiza esta accion, redirecciona al area de login nuevamente
 
 class IndexView(generic.TemplateView):
 	template_name = "main/index.html" #asignando la vista
