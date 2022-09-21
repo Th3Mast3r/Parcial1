@@ -240,15 +240,17 @@
                     {% for b in blogs%}
                     {% if b.is_active %}
                     <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>{{b.name}}</h4>
-                            <ul>
-                                <li>{{b.date}}</li>
+                        <a href="{% url 'main:blog' slug=b.slug %}">
+                            <div class="blog__item latest__item">
+                                <h4>{{b.name}}</h4>
+                                <ul>
+                                    <li>{{b.date}}</li>
                                 
-                            </ul>
-                            <p>{{b.description|safe}}</p>
-                            <a href="{% url 'main:blog' slug=b.slug %}">Read more <span class="arrow_right"></span></a>
-                        </div>
+                                </ul>
+                                <p>{{b.description|safe}}</p>
+                               Read more <span class="arrow_right"></span>
+                            </div>
+                        </a>
                     </div>
                     {% endif %}
                     {% endfor %}
